@@ -40,7 +40,7 @@ env = Env(**scheme)
 
 # Core
 # TODO: set the PROJECT_NAME setting - do not include spaces in this name
-PROJECT_NAME: str = "<INSERT_PROJECT_NAME_HERE>"
+PROJECT_NAME: str = "interactive_api"
 SECRET_KEY: str = env("SECRET_KEY")
 SITE_URL: str = env("SITE_URL")
 # NOTE: We do not use the axes middleware because we want login attempts to
@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     # Project apps
     "webapp.apps.WebAppConfig",
     "users.apps.UsersConfig",
+    "music.apps.MusicConfig",
     # Our defaults
     "corsheaders",
     "anymail",
@@ -90,6 +91,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "axes",
+    # OpenAPI
+    "drf_yasg",
+    "rest_framework_swagger",
 ]
 
 MIDDLEWARE = [
@@ -255,6 +259,7 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
     ],
     "TEST_REQUEST_DEFAULT_FORMAT": "vnd.api+json",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework_json_api.schemas.openapi.AutoSchema",
 }
 
 # DRF Auth
